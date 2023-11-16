@@ -3,7 +3,7 @@ name: Weekly Build
 on:
   workflow_dispatch:
   schedule:
-  - cron:  '*/5 * * * *'
+  - cron:  '0 14 * * 1'
 
 jobs:
     delete-weekly-tag:
@@ -12,11 +12,10 @@ jobs:
         steps:
             - name: Check out the repo
               uses: actions/checkout@v4
-            
-            - name: List Files
-              run: ls -alh
 
-            - uses: dev-drprasad/delete-tag-and-release@v1.0 # PRERELEASE is v1.0 and can also be used to test and give us feedback
+            - uses: rickstaa/action-create-tag@v1
+              id: "tag_create"
               with:
-                tag_name: weekly
-                github_token: ${{ secrets.GITHUB_TOKEN }} # (required) a GitHub token with write access to the repo that needs to be modified
+                tag: "weekly"
+                force_push_tag: true
+                message: "Weekly build"
