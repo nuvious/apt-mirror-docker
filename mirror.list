@@ -1,0 +1,24 @@
+# set base_path         /var/spool/apt-mirror
+set base_path         /debian-mirror
+set mirror_path       $base_path/data
+set skel_path         $base_path/skel
+set var_path          $base_path/var
+set postmirror_script $var_path/postmirror.sh
+set defaultarch       amd64
+set run_postmirror    0
+set nthreads          6
+set limit_rate        100m
+set _tilde            0
+set unlink            1
+set use_proxy         off
+set http_proxy        127.0.0.1:3128
+set proxy_user        user
+set proxy_password    password
+deb http://deb.debian.org/debian bookworm main contrib non-free
+deb-src http://deb.debian.org/debian bookworm main contrib non-free
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free
+deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free
+deb http://deb.debian.org/debian bookworm-updates main
+deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free
+deb http://deb.debian.org/debian bookworm-backports main
+deb-src http://deb.debian.org/debian bookworm-backports main contrib non-free
