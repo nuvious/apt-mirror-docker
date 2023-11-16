@@ -2,6 +2,9 @@
 name: Publish Docker image
 
 on:  
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '7 9 * * 5'
   push:
     tags:
       - '*'
