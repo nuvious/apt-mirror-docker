@@ -2,8 +2,7 @@ name: Weekly Build
 
 on:  
   schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '17 * * * *'
+  - cron:  '21 * * * *'
 
 jobs:
     delete-weekly-tag:
