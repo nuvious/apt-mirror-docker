@@ -46,10 +46,9 @@ jobs:
           tags: nuvious/apt-mirror:${{ steps.previoustag.outputs.tag }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Sync README with Dockerhub
-        uses: ms-jpq/sync-dockerhub-readme@v1
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_USERNAME }}
           repository: nuvious/apt-mirror
-          readme: "./README.md"
