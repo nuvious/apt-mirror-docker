@@ -12,6 +12,6 @@ RUN apt-get install apt-mirror gnupg xz-utils cron -y
 COPY apt-mirror.cron /etc/cron.d/apt-mirror
 
 # Link apt-mirror data directory to /var/www/html
-RUN rm -rf /var/www/html
-RUN mkdir -p /var/spool/apt-mirror/data /var/www && \
-    ln -s /var/spool/apt-mirror/data /var/www/html
+RUN rm -rf /usr/share/nginx && \
+    mkdir -p /var/spool/apt-mirror/data /usr/share/nginx && \
+    ln -s /var/spool/apt-mirror/data /usr/share/nginx/html
