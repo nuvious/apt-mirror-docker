@@ -13,7 +13,7 @@ docker run -d \
 
 ## Example mirror.list
 
-**NOTE**: The container is configured to use a symbolic link from `/var/spool/apt-mirror/data` to `/var/www/html`.
+**NOTE**: The container is configured to use a symbolic link from `/var/spool/apt-mirror/data` to `/usr/share/nginx/html`.
 The `base_path` and `mirror_path` therefore should not be changed, but other paths can be modified. You want to mount
 your volume to `/var/spool/apt-mirror` using a default configuration below. Other configurations are possible in
 docker-compose if one modifies the entrypoint and/or command to update the directory structure to their liking.
@@ -34,12 +34,12 @@ set use_proxy         off
 set http_proxy        127.0.0.1:3128
 set proxy_user        user
 set proxy_password    password
-deb http://deb.debian.org/debian bookworm main contrib non-free
-deb-src http://deb.debian.org/debian bookworm main contrib non-free
-deb http://security.debian.org/debian-security bookworm-security main contrib non-free
-deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free
-deb http://deb.debian.org/debian bookworm-updates main
-deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free
-deb http://deb.debian.org/debian bookworm-backports main
-deb-src http://deb.debian.org/debian bookworm-backports main contrib non-free
+deb http://deb.debian.org/debian stable main contrib non-free-firmware
+deb-src http://deb.debian.org/debian stable main contrib non-free-firmware
+deb http://security.debian.org/debian-security stable-security main contrib non-free-firmware
+deb-src http://security.debian.org/debian-security stable-security main contrib non-free-firmware
+deb http://deb.debian.org/debian stable-updates main
+deb-src http://deb.debian.org/debian stable-updates main contrib non-free-firmware
+deb http://deb.debian.org/debian stable-backports main
+deb-src http://deb.debian.org/debian stable-backports main contrib non-free-firmware
 ```
