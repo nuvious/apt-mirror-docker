@@ -1,13 +1,17 @@
-FROM debian:bookworm-slim
+FROM nginx:bookworm
 
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install apt-mirror apache2 gnupg xz-utils -y
+# Upgrade the system (vulnerability reduction)
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get autoremove --purge -y
+
+# Install apt-mirror components and cron
+RUN apt-get install apt-mirror gnupg xz-utils cron -y
+
+# Enable cron updates
+COPY apt-mirror.cron /etc/cron.d/apt-mirror
+
+# Link apt-mirror data directory to /var/www/html
 RUN rm -rf /var/www/html
 RUN mkdir -p /var/spool/apt-mirror/data /var/www && \
     ln -s /var/spool/apt-mirror/data /var/www/html
-
-WORKDIR /app
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
-
-CMD ["/app/entrypoint.sh"]
