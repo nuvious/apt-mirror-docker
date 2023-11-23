@@ -8,8 +8,9 @@ RUN apt-get update && \
 # Install apt-mirror components and cron
 RUN apt-get install apt-mirror gnupg xz-utils cron -y
 
-# Enable cron updates
+# Enable cron updates and copy nginx configuration
 COPY apt-mirror.cron /etc/cron.d/apt-mirror
+COPY default.conf /etc/nginx/conf.d/default.conf
 
 # Link apt-mirror data directory to /var/www/html
 RUN rm -rf /usr/share/nginx && \
