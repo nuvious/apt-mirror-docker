@@ -1,4 +1,4 @@
-FROM nginx:bookworm
+FROM debian:stable-slim
 
 # Upgrade the system (vulnerability reduction)
 RUN apt-get update && \
@@ -7,12 +7,7 @@ RUN apt-get update && \
 
 # Install apt-mirror components and cron
 RUN apt-get install apt-mirror gnupg xz-utils cron -y
-
-# Enable cron updates and copy nginx configuration
 COPY apt-mirror.cron /etc/cron.d/apt-mirror
-COPY default.conf /etc/nginx/conf.d/default.conf
 
-# Link apt-mirror data directory to /var/www/html
-RUN rm -rf /usr/share/nginx && \
-    mkdir -p /var/spool/apt-mirror/data /usr/share/nginx && \
-    ln -s /var/spool/apt-mirror/data /usr/share/nginx/html
+# Run apt-mirror; default directory will be /var/spool/apt-mirror/data for data
+CMD ["/usr/bin/apt-mirror"]
